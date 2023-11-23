@@ -210,6 +210,7 @@ simple_expression   : additive_expression relop additive_expression
                          { 
                               $$=newTreeNode(BinOpExpr); $$->lineno = $1->lineno; $$->opcode=$2->opcode;
                               $$->child[0] = $1; $$->child[1] = $3;
+                              free($2);
                          }
                     | additive_expression { $$ = $1; }
                     ;
