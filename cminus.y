@@ -226,7 +226,7 @@ additive_expression : additive_expression addop term
                               $$->child[0] = $1; $$->child[1] = $3;
                          }
 					| term { $$=$1; }
-addop				: PLUS  { $$=newTreeNode(Opcoder); $$->lineno = $1->lineno; $$->opcode = PLUS; }
+addop				: PLUS  { $$=newTreeNode(Opcode); $$->lineno = $1->lineno; $$->opcode = PLUS; }
 					| MINUS { $$=newTreeNode(Opcode); $$->lineno = $1->lineno; $$->opcode = MINUS; }
 					;
 term                : term mulop factor
