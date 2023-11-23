@@ -167,7 +167,7 @@ selection_stmt		: IF LPAREN expression RPAREN statement ELSE statement
 						}
 					;
 expression_stmt     : expression SEMI { $$=$1; }
-                    | SEMI { $$=$1; }
+                    | SEMI { $$=NULL; }
                     ;
 iteration_stmt      : WHILE LPAREN expression RPAREN statement
                          { 
@@ -208,7 +208,8 @@ var                 : identifier
                     ;
 simple_expression   : additive_expression relop additive_expression
                          { 
-						$$=$2; $$->child[0] = $1; $$->child[1] = $3;
+                              $$=newTreeNode(BinOpExpr); $$->lineno = $1->lineno; $$->opcode=$2->opcode;
+                              $$->child[0] = $1; $$->child[1] = $3;
                          }
                     | additive_expression { $$ = $1; }
                     ;
@@ -221,20 +222,22 @@ relop               : LE { $$ = newTreeNode(Opcode); $$->lineno = lineno; $$->op
                     ;
 additive_expression : additive_expression addop term
                          { 
-						$$=$2; $$->child[0] = $1; $$->child[1] = $3;
+						$$=newTreeNode(BinOpExpr); $$->lineno = $1->lineno; $$->opcode=$2->opcode;
+                              $$->child[0] = $1; $$->child[1] = $3;
                          }
 					| term { $$=$1; }
-addop				: PLUS  { $$=newTreeNode(BinOpExpr); $$->lineno = $1->lineno; $$->opcode = PLUS; }
-					| MINUS { $$=newTreeNode(BinOpExpr); $$->lineno = $1->lineno; $$->opcode = MINUS; }
+addop				: PLUS  { $$=newTreeNode(Opcoder); $$->lineno = $1->lineno; $$->opcode = PLUS; }
+					| MINUS { $$=newTreeNode(Opcode); $$->lineno = $1->lineno; $$->opcode = MINUS; }
 					;
 term                : term mulop factor
 						{
-							$$=$2; $$->child[0] = $1; $$->child[1] = $3;
+							$$=newTreeNode(BinOpExpr); $$->lineno = $1->lineno; $$->opcode=$2->opcode;
+                                   $$->child[0] = $1; $$->child[1] = $3;
 						}
 					| factor { $$=$1; }
 					;
-mulop               : TIMES { $$=newTreeNode(BinOpExpr); $$->lineno = $1->lineno; $$->opcode = TIMES; }
-					| OVER  { $$=newTreeNode(BinOpExpr); $$->lineno = $1->lineno; $$->opcode = OVER; }
+mulop               : TIMES { $$=newTreeNode(Opcode); $$->lineno = $1->lineno; $$->opcode = TIMES; }
+					| OVER  { $$=newTreeNode(Opcode); $$->lineno = $1->lineno; $$->opcode = OVER; }
 					;
 factor              : LPAREN expression RPAREN { $$=$2; }
                     | var { $$=$1; }
