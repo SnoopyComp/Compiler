@@ -224,7 +224,7 @@ relop               : LE { $$ = newTreeNode(Opcode); $$->lineno = lineno; $$->op
 additive_expression : additive_expression addop term
                          { 
 						$$=newTreeNode(BinOpExpr); $$->lineno = $2->lineno; $$->opcode=$2->opcode;
-                              $$->child[0] = $1; $$->child[1] = $3
+                              $$->child[0] = $1; $$->child[1] = $3;
                               free($2);
                          }
 					| term { $$=$1; }
