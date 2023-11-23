@@ -235,6 +235,7 @@ term                : term mulop factor
 						{
 							$$=newTreeNode(BinOpExpr); $$->lineno = $1->lineno; $$->opcode=$2->opcode;
                                    $$->child[0] = $1; $$->child[1] = $3;
+                                   free($2);
 						}
 					| factor { $$=$1; }
 					;
