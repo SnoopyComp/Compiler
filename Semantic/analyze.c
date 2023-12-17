@@ -397,14 +397,18 @@ static void checkNode(TreeNode *t)
 			TreeNode *paramNode = calleeSymbol->node->child[0];
 			TreeNode *argNode = t->child[0];
 			//void argment with non-null parameter
-			if(paramNode->flag==TRUE && argNode!=NULL)InvalidFunctionCallError(t->name,t->lineno);
+			if((paramNode->flag==TRUE && argNode!=NULL)
+			{
+				if(argNode->type != void) InvalidFunctionCallError(t->name,t->lineno);
+			}
 			//non-void argment with null parameter
 			else if( paramNode->flag==FALSE && argNode==NULL) InvalidFunctionCallError(t->name,t->lineno);
-			else while(paramNode && argNode){
-				if(paramNode->type != argNode->type) InvalidFunctionCallError(t->name,t->lineno);
-				paramNode=paramNode->sibling;
-				argNode=argNode->sibling;
-			}
+			else 
+				while(paramNode && argNode){
+					if(paramNode->type != argNode->type) InvalidFunctionCallError(t->name,t->lineno);
+					paramNode=paramNode->sibling;
+					argNode=argNode->sibling;
+				}
 					
 			/*********************Fill the Code*************************
 			 *                                                         *
