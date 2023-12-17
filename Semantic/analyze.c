@@ -375,7 +375,7 @@ static void checkNode(TreeNode *t)
 			if(t->child[0]->type != Integer || t->child[1]->type != Integer) 
 			{
 				if (t->kind == AssignExpr) InvalidAssignmentError(t->lineno);
-				if (t->kind == BinOpExpr) InvalidAssignmentError(t->lineno);
+				if (t->kind == BinOpExpr) InvalidOperationError(t->lineno);
 			}
 			/*********************Fill the Code*************************
 			 *                                                         *
