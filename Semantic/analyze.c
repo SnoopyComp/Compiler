@@ -372,6 +372,7 @@ static void checkNode(TreeNode *t)
 			{
 				if (t->kind == AssignExpr) InvalidAssignmentError(t->lineno);
 				if (t->kind == BinOpExpr) InvalidAssignmentError(t->lineno);
+			}
 			/*********************Fill the Code*************************
 			 *                                                         *
 			 *                                                         *
