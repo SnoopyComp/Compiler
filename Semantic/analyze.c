@@ -397,7 +397,7 @@ static void checkNode(TreeNode *t)
 			TreeNode *paramNode = calleeSymbol->node->child[0];
 			TreeNode *argNode = t->child[0];
 			//void argment with non-null parameter
-			if((paramNode->flag==TRUE && argNode!=NULL)
+			if(paramNode->flag==TRUE && argNode!=NULL)
 			{
 				if(argNode->type != void) InvalidFunctionCallError(t->name,t->lineno);
 			}
