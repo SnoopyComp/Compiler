@@ -404,7 +404,7 @@ static void checkNode(TreeNode *t)
 				if(paramNode->type != argNode->type) InvalidFunctionCallError(t->name,t->lineno);
 				paramNode=paramNode->sibling;
 				argNode=argNode->sibling;
-			} while(paramNode->sibling || argNode->sibling)
+			} while(paramNode->sibling || argNode->sibling);
 					
 			/*********************Fill the Code*************************
 			 *                                                         *
