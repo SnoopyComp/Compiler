@@ -411,6 +411,7 @@ static void checkNode(TreeNode *t)
 					argNode=argNode->sibling;
 				}
 				if(paramNode!=NULL || argNode!=NULL) InvalidFunctionCallError(t->name,t->lineno);
+			}
 					
 			/*********************Fill the Code*************************
 			 *                                                         *
