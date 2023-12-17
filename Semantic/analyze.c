@@ -185,7 +185,7 @@ static void insertNode(TreeNode *t)
 			SymbolRec *symbol = lookupSymbolInCurrentScope(currentScope, t->name);
 			if(symbol != NULL) RedefinitionError(t->name, t->lineno, symbol);
 			// Insert New Variable Symbol to Symbol Table
-			insertSymbol(currentScope, t->name, t->type, Params, t->lineno, t);
+			insertSymbol(currentScope, t->name, t->type, VariableSym, t->lineno, t);
 			/*********************Fill the Code*************************
 			 *                                                         *
 			 *                                                         *
