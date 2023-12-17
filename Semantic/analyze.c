@@ -399,7 +399,7 @@ static void checkNode(TreeNode *t)
 			//void argment with non-null parameter
 			if(paramNode->flag==TRUE && argNode!=NULL)
 			{
-				if(argNode->type != void) InvalidFunctionCallError(t->name,t->lineno);
+				if(argNode->type != Void) InvalidFunctionCallError(t->name,t->lineno);
 			}
 			//non-void argment with null parameter
 			else if( paramNode->flag==FALSE && argNode==NULL) InvalidFunctionCallError(t->name,t->lineno);
