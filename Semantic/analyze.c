@@ -400,9 +400,8 @@ static void checkNode(TreeNode *t)
 			if(paramNode->flag==TRUE && argNode!=NULL)InvalidFunctionCallError(t->name,t->lineno);
 			//non-void argment with null parameter
 			else if( paramNode->flag==FALSE && argNode==NULL) InvalidFunctionCallError(t->name,t->lineno);
-			while(1){
+			while(paramNode && argNode){
 				if(paramNode->type != argNode->type) InvalidFunctionCallError(t->name,t->lineno);
-				if(!paramNode->sibling || !argNode->sibling) break;
 				paramNode=paramNode->sibling;
 				argNode=argNode->sibling;
 			}
