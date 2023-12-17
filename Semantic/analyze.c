@@ -367,8 +367,11 @@ static void checkNode(TreeNode *t)
 		{
 			// Error Check
 			ERROR_CHECK(t->child[0] != NULL && t->child[1] != NULL);
-			if(t->child[0]->type != Integer || t->child[0]->type != Integer) InvalidOperationError(t->lineno);
 			// Semantic Error: Invalid Assignment / Operation
+			if(t->child[0]->type != Integer || t->child[1]->type != Integer) 
+			{
+				if (t->kind == AssignExpr) InvalidAssignmentError(t->lineno);
+				if (t->kind == BinOpExpr) InvalidAssignmentError(t->lineno);
 			/*********************Fill the Code*************************
 			 *                                                         *
 			 *                                                         *
