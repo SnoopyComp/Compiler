@@ -351,7 +351,8 @@ static void checkNode(TreeNode *t)
 			// Semantic Error: Invalid Return
 			if(currentScope->func->type==Void)
 				if (t->flag!=TRUE) InvalidReturnError(t->lineno);
-			else if (currentScope->func->type != t->type) InvalidReturnError(t->lineno);
+			else if (t->flag==FALSE) 
+				if(correntScope->func->type != t->child[0]->type) InvalidReturnError(t->lineno);
 			/*********************Fill the Code*************************
 			 *                                                         *
 			 *                                                         *
