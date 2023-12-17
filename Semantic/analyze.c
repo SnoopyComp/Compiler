@@ -221,8 +221,8 @@ static void insertNode(TreeNode *t)
 		case VarAccessExpr:
 		{
 			// Semantic Error: Undeclared Variables
-			SymbolRec *func = lookupSymbolWithKind(currentScope, t->name, FunctionSym);
-			if(func == NULL) func = UndeclaredFunctionError(currentScope, t);
+			SymbolRec *func = lookupSymbolWithKind(currentScope, t->name, VariableSym);
+			if(func == NULL) func = UndeclaredVariableError(currentScope, t);
 			// Update Symbol Table Entry
 			else
 				appendSymbol(currentScope, t->name, t->lineno);
